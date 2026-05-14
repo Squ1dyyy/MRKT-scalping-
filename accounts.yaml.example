@@ -1,0 +1,69 @@
+# Rename to accounts.yaml and fill in your tokens.
+# Each account needs an auth_token from tgmrkt.io.
+#
+# Available roles:
+#   SCANNER  – read-only: feed, collections, listings, orders/top
+#   ORDERER  – create / cancel buy orders
+#   OFFERER  – create / cancel offers
+#   BUYER    – instant buy_gift unstablea
+#   SELLER   – put gifts on sale
+#   WALLET   – balance, history, activities
+#
+# Minimal (single account):
+accounts:
+  - name: main
+    auth_token: "YOUR_AUTH_TOKEN_HERE"
+    roles:
+      - SCANNER
+      - ORDERER
+      - OFFERER
+      - BUYER
+      - SELLER
+      - WALLET
+    rate_limit_rps: 2.0
+
+# Two-account setup (recommended):
+# accounts:
+#   - name: scanner
+#     auth_token: "TOKEN_1"
+#     roles:
+#       - SCANNER
+#       - WALLET
+#     proxy: "socks5://user:pass@proxy-1.example.com:1080"
+#     rate_limit_rps: 5.0
+#
+#   - name: trader
+#     auth_token: "TOKEN_2"
+#     roles:
+#       - ORDERER
+#       - OFFERER
+#       - BUYER
+#       - SELLER
+#     proxy: "socks5://user:pass@proxy-2.example.com:1080"
+#     rate_limit_rps: 2.0
+#
+# Four-account setup (maximum parallelism):
+# accounts:
+#   - name: scanner-1
+#     auth_token: "TOKEN_1"
+#     roles: [SCANNER]
+#     proxy: "socks5://proxy-1:1080"
+#     rate_limit_rps: 6.0
+#
+#   - name: scanner-2
+#     auth_token: "TOKEN_2"
+#     roles: [SCANNER]
+#     proxy: "socks5://proxy-2:1080"
+#     rate_limit_rps: 6.0
+#
+#   - name: orderer
+#     auth_token: "TOKEN_3"
+#     roles: [ORDERER, WALLET]
+#     proxy: "socks5://proxy-3:1080"
+#     rate_limit_rps: 2.0
+#
+#   - name: offerer-buyer
+#     auth_token: "TOKEN_4"
+#     roles: [OFFERER, BUYER, SELLER]
+#     proxy: "socks5://proxy-4:1080"
+#     rate_limit_rps: 3.0
